@@ -6,37 +6,36 @@
     <title>Resumo Completo de Espanhol</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Biblioteca para gerar PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" xintegrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Configuração para o dark mode do Tailwind
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
         }
-        @media print {
-            header, footer, #download-button {
-                display: none !important;
-            }
-            main {
-                margin-top: 0 !important;
-                padding-top: 0 !important;
-            }
-        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-200 transition-colors duration-300">
 
     <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-10">
+    <header class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm shadow-md sticky top-0 z-10">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-xl font-bold text-sky-600">Resumo de Espanhol</div>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#saudacoes" class="text-slate-600 hover:text-sky-600 font-medium">Saudações</a>
-                <a href="#verbos" class="text-slate-600 hover:text-sky-600 font-medium">Verbos</a>
-                <a href="#vocabulario" class="text-slate-600 hover:text-sky-600 font-medium">Vocabulário</a>
-                <a href="#horas" class="text-slate-600 hover:text-sky-600 font-medium">Horas</a>
-                <button id="download-button" class="ml-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-                    Baixar como PDF
+            <div class="text-xl font-bold text-sky-600 dark:text-sky-500">Resumo de Espanhol</div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#saudacoes" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-500 font-medium transition-colors">Saudações</a>
+                <a href="#verbos" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-500 font-medium transition-colors">Verbos</a>
+                <a href="#vocabulario" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-500 font-medium transition-colors">Vocabulário</a>
+                <a href="#horas" class="text-slate-600 dark:text-slate-300 hover:text-sky-600 dark:hover:text-sky-500 font-medium transition-colors">Horas</a>
+                <!-- Botão de Dark Mode -->
+                <button id="dark-mode-toggle" class="ml-4 p-2 rounded-full text-slate-500 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                    <!-- Ícone da Lua -->
+                    <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <!-- Ícone do Sol (inicialmente escondido) -->
+                    <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun hidden"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
                 </button>
             </div>
         </nav>
@@ -47,12 +46,12 @@
         
         <!-- Seção de Saudações e Apresentações -->
         <section id="saudacoes" class="mb-16">
-            <h2 class="text-3xl font-bold mb-6 border-l-4 border-sky-500 pl-4">1. Saudações e Apresentações</h2>
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-sky-500 pl-4 dark:text-slate-100">1. Saudações e Apresentações</h2>
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- Coluna Esquerda -->
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="font-bold text-xl mb-4 text-slate-700">Comprimentos e Despedidas</h3>
-                    <ul class="space-y-2 list-disc list-inside text-slate-600">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 text-slate-700 dark:text-slate-200">Comprimentos e Despedidas</h3>
+                    <ul class="space-y-2 list-disc list-inside text-slate-600 dark:text-slate-400">
                         <li><b>¡Hola!</b> - Oi!</li>
                         <li><b>¡Buenos días!</b> - Bom dia!</li>
                         <li><b>¡Buenas tardes!</b> - Boa tarde!</li>
@@ -62,78 +61,78 @@
                     </ul>
                 </div>
                 <!-- Coluna Direita -->
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="font-bold text-xl mb-4 text-slate-700">Perguntas e Respostas</h3>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 text-slate-700 dark:text-slate-200">Perguntas e Respostas</h3>
                     <p class="mb-2"><b>Como perguntar o nome:</b></p>
-                    <p class="ml-4 text-slate-600">¿Cómo te llamas? (Informal)</p>
-                    <p class="ml-4 text-slate-600 mb-4">¿Cómo se llama usted? (Formal)</p>
+                    <p class="ml-4 text-slate-600 dark:text-slate-400">¿Cómo te llamas? (Informal)</p>
+                    <p class="ml-4 text-slate-600 dark:text-slate-400 mb-4">¿Cómo se llama usted? (Formal)</p>
                     <p class="mb-2"><b>Como perguntar a nacionalidade:</b></p>
-                    <p class="ml-4 text-slate-600">¿De dónde eres? (Informal)</p>
-                    <p class="ml-4 text-slate-600">¿De dónde es usted? (Formal)</p>
+                    <p class="ml-4 text-slate-600 dark:text-slate-400">¿De dónde eres? (Informal)</p>
+                    <p class="ml-4 text-slate-600 dark:text-slate-400">¿De dónde es usted? (Formal)</p>
                 </div>
             </div>
         </section>
 
         <!-- Seção de Verbos -->
         <section id="verbos" class="mb-16">
-            <h2 class="text-3xl font-bold mb-6 border-l-4 border-sky-500 pl-4">2. Verbos Essenciais</h2>
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-sky-500 pl-4 dark:text-slate-100">2. Verbos Essenciais</h2>
             <div class="space-y-8">
                 <!-- Verbo LLAMARSE -->
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="font-bold text-xl mb-4 text-slate-700">Verbo LLAMARSE (Chamar-se)</h3>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 text-slate-700 dark:text-slate-200">Verbo LLAMARSE (Chamar-se)</h3>
                     <table class="w-full text-left">
-                        <thead class="bg-slate-100">
+                        <thead class="bg-slate-100 dark:bg-slate-700">
                             <tr>
                                 <th class="p-3">Pronome</th>
                                 <th class="p-3">Conjugação</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="border-b"> <td class="p-3">Yo</td> <td class="p-3">me llamo</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Tú</td> <td class="p-3">te llamas</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Él/Ella/Usted</td> <td class="p-3">se llama</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Nosotros(as)</td> <td class="p-3">nos llamamos</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Vosotros(as)</td> <td class="p-3">os llamáis</td> </tr>
+                        <tbody class="text-slate-600 dark:text-slate-400">
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Yo</td> <td class="p-3">me llamo</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Tú</td> <td class="p-3">te llamas</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Él/Ella/Usted</td> <td class="p-3">se llama</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Nosotros(as)</td> <td class="p-3">nos llamamos</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Vosotros(as)</td> <td class="p-3">os llamáis</td> </tr>
                             <tr> <td class="p-3">Ellos/Ellas/Ustedes</td> <td class="p-3">se llaman</td> </tr>
                         </tbody>
                     </table>
                 </div>
                 <!-- Verbo SER -->
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="font-bold text-xl mb-4 text-slate-700">Verbo SER (Ser)</h3>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 text-slate-700 dark:text-slate-200">Verbo SER (Ser)</h3>
                     <table class="w-full text-left">
-                         <thead class="bg-slate-100">
+                         <thead class="bg-slate-100 dark:bg-slate-700">
                             <tr>
                                 <th class="p-3">Pronome</th>
                                 <th class="p-3">Conjugação</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="border-b"> <td class="p-3">Yo</td> <td class="p-3">soy</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Tú</td> <td class="p-3">eres</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Él/Ella/Usted</td> <td class="p-3">es</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Nosotros(as)</td> <td class="p-3">somos</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Vosotros(as)</td> <td class="p-3">sois</td> </tr>
+                        <tbody class="text-slate-600 dark:text-slate-400">
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Yo</td> <td class="p-3">soy</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Tú</td> <td class="p-3">eres</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Él/Ella/Usted</td> <td class="p-3">es</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Nosotros(as)</td> <td class="p-3">somos</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Vosotros(as)</td> <td class="p-3">sois</td> </tr>
                             <tr> <td class="p-3">Ellos/Ellas/Ustedes</td> <td class="p-3">son</td> </tr>
                         </tbody>
                     </table>
                 </div>
                  <!-- Verbo IR -->
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="font-bold text-xl mb-4 text-slate-700">Verbo IR (Ir)</h3>
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 text-slate-700 dark:text-slate-200">Verbo IR (Ir)</h3>
                     <table class="w-full text-left">
-                         <thead class="bg-slate-100">
+                         <thead class="bg-slate-100 dark:bg-slate-700">
                             <tr>
                                 <th class="p-3">Pronome</th>
                                 <th class="p-3">Conjugação</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr class="border-b"> <td class="p-3">Yo</td> <td class="p-3">voy</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Tú</td> <td class="p-3">vas</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Él/Ella/Usted</td> <td class="p-3">va</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Nosotros(as)</td> <td class="p-3">vamos</td> </tr>
-                            <tr class="border-b"> <td class="p-3">Vosotros(as)</td> <td class="p-3">vais</td> </tr>
+                        <tbody class="text-slate-600 dark:text-slate-400">
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Yo</td> <td class="p-3">voy</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Tú</td> <td class="p-3">vas</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Él/Ella/Usted</td> <td class="p-3">va</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Nosotros(as)</td> <td class="p-3">vamos</td> </tr>
+                            <tr class="border-b dark:border-slate-700"> <td class="p-3">Vosotros(as)</td> <td class="p-3">vais</td> </tr>
                             <tr> <td class="p-3">Ellos/Ellas/Ustedes</td> <td class="p-3">van</td> </tr>
                         </tbody>
                     </table>
@@ -143,11 +142,11 @@
 
         <!-- Seção de Vocabulário -->
         <section id="vocabulario" class="mb-16">
-            <h2 class="text-3xl font-bold mb-6 border-l-4 border-sky-500 pl-4">3. Vocabulário Geral</h2>
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-sky-500 pl-4 dark:text-slate-100">3. Vocabulário Geral</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="font-bold text-xl mb-4">Sala de Aula</h3>
-                    <ul class="space-y-2 list-disc list-inside">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 dark:text-slate-200">Sala de Aula</h3>
+                    <ul class="space-y-2 list-disc list-inside text-slate-600 dark:text-slate-400">
                         <li>La pizarra</li>
                         <li>El pupitre</li>
                         <li>La goma</li>
@@ -155,9 +154,9 @@
                         <li>El sacapuntas</li>
                     </ul>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="font-bold text-xl mb-4">Roupas (Ropas)</h3>
-                    <ul class="space-y-2 list-disc list-inside">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 dark:text-slate-200">Roupas (Ropas)</h3>
+                    <ul class="space-y-2 list-disc list-inside text-slate-600 dark:text-slate-400">
                         <li>La falda</li>
                         <li>Los pantalones</li>
                         <li>La camiseta</li>
@@ -165,9 +164,9 @@
                         <li>Los calcetines</li>
                     </ul>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="font-bold text-xl mb-4">Comidas</h3>
-                    <ul class="space-y-2 list-disc list-inside">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 dark:text-slate-200">Comidas</h3>
+                    <ul class="space-y-2 list-disc list-inside text-slate-600 dark:text-slate-400">
                         <li>Unas gambas</li>
                         <li>Un pollo</li>
                         <li>Un pescado</li>
@@ -175,9 +174,9 @@
                         <li>Un helado</li>
                     </ul>
                 </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="font-bold text-xl mb-4">Profissões</h3>
-                    <ul class="space-y-2 list-disc list-inside">
+                <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 dark:text-slate-200">Profissões</h3>
+                    <ul class="space-y-2 list-disc list-inside text-slate-600 dark:text-slate-400">
                         <li>Albañil</li>
                         <li>Ingeniero/a</li>
                         <li>Abogado/a</li>
@@ -185,9 +184,9 @@
                         <li>Estudiante</li>
                     </ul>
                 </div>
-                 <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="font-bold text-xl mb-4">Esportes</h3>
-                    <ul class="space-y-2 list-disc list-inside">
+                 <div class="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-sm">
+                    <h3 class="font-bold text-xl mb-4 dark:text-slate-200">Esportes</h3>
+                    <ul class="space-y-2 list-disc list-inside text-slate-600 dark:text-slate-400">
                         <li>El fútbol</li>
                         <li>El baloncesto</li>
                         <li>El tenis</li>
@@ -200,26 +199,26 @@
 
         <!-- Seção de Horas -->
         <section id="horas" class="mb-16">
-            <h2 class="text-3xl font-bold mb-6 border-l-4 border-sky-500 pl-4">4. Como Dizer as Horas</h2>
-            <div class="bg-white p-8 rounded-lg shadow flex flex-col md:flex-row items-center gap-8">
+            <h2 class="text-3xl font-bold mb-6 border-l-4 border-sky-500 pl-4 dark:text-slate-100">4. Como Dizer as Horas</h2>
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-lg shadow-sm flex flex-col md:flex-row items-center gap-8">
                 <div class="flex-1">
-                    <h3 class="font-bold text-xl mb-4">Regras Principais</h3>
-                    <ul class="space-y-3 list-disc list-inside">
+                    <h3 class="font-bold text-xl mb-4 dark:text-slate-200">Regras Principais</h3>
+                    <ul class="space-y-3 list-disc list-inside text-slate-600 dark:text-slate-400">
                         <li>A pergunta é sempre: <b>¿Qué hora es?</b></li>
                         <li>Para 1:00, usa-se <b>Es la una...</b></li>
                         <li>Para as outras horas, usa-se <b>Son las...</b></li>
                         <li><b>Lado Positivo (Minutos 1-30):</b> Usa-se "y".</li>
                         <li><b>Lado Negativo (Minutos 31-59):</b> Usa-se "menos".</li>
                     </ul>
-                    <div class="mt-6 bg-sky-100 border-l-4 border-sky-500 text-sky-800 p-4 rounded-r-lg">
+                    <div class="mt-6 bg-sky-100 dark:bg-sky-900/50 border-l-4 border-sky-500 text-sky-800 dark:text-sky-300 p-4 rounded-r-lg">
                         <p><b>:15</b> = y cuarto</p>
                         <p><b>:30</b> = y media</p>
                         <p><b>:45</b> = menos cuarto</p>
                     </div>
                 </div>
                 <div class="flex-1">
-                    <h3 class="font-bold text-xl mb-4">Exemplos Práticos</h3>
-                    <ul class="space-y-2">
+                    <h3 class="font-bold text-xl mb-4 dark:text-slate-200">Exemplos Práticos</h3>
+                    <ul class="space-y-2 text-slate-600 dark:text-slate-400">
                         <li><b>02:05</b> - Son las dos y cinco.</li>
                         <li><b>04:15</b> - Son las cuatro y cuarto.</li>
                         <li><b>06:30</b> - Son las seis y media.</li>
@@ -233,25 +232,21 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-800 text-white text-center py-4 mt-8">
+    <footer class="bg-slate-800 dark:bg-slate-900/50 text-white dark:text-slate-300 text-center py-4 mt-8">
         <p>Resumo criado para te ajudar a gabaritar a prova!</p>
     </footer>
 
     <script>
-        // Lógica para o botão de download
-        document.getElementById('download-button').addEventListener('click', function () {
-            const content = document.getElementById('main-content');
-            
-            const opt = {
-                margin:       1,
-                filename:     'resumo_espanhol.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            
-            // Gera o PDF a partir do elemento 'main-content'
-            html2pdf().from(content).set(opt).save();
+        // Lógica para o botão de Dark Mode
+        const toggleButton = document.getElementById('dark-mode-toggle');
+        const moonIcon = document.getElementById('moon-icon');
+        const sunIcon = document.getElementById('sun-icon');
+        const htmlEl = document.documentElement;
+
+        toggleButton.addEventListener('click', () => {
+            htmlEl.classList.toggle('dark');
+            moonIcon.classList.toggle('hidden');
+            sunIcon.classList.toggle('hidden');
         });
     </script>
 
