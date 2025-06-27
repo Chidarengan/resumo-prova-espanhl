@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício: Que Hora Es?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .clock {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 8px solid #334155; /* slate-700 */
+            background-color: #f1f5f9; /* slate-100 */
+            position: relative;
+        }
+        .hand {
+            position: absolute;
+            width: 50%;
+            height: 4px;
+            background: #334155; /* slate-700 */
+            top: 50%;
+            transform-origin: 100%;
+            transform: rotate(90deg);
+            transition: transform 0.5s ease-in-out;
+        }
+        .hour-hand {
+            width: 35%;
+            left: 15%;
+            background: #0f172a; /* slate-900 */
+            height: 6px;
+        }
+        .minute-hand {
+            height: 4px;
+        }
+        .center-dot {
+            width: 12px;
+            height: 12px;
+            background: #0f172a; /* slate-900 */
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .number {
+            position: absolute;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #334155;
+        }
+        .number-12 { top: 10px; left: 50%; transform: translateX(-50%); }
+        .number-3 { top: 50%; right: 10px; transform: translateY(-50%); }
+        .number-6 { bottom: 10px; left: 50%; transform: translateX(-50%); }
+        .number-9 { top: 50%; left: 10px; transform: translateY(-50%); }
+    </style>
+</head>
+<body class="bg-gray-200 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 sm:p-8 rounded-xl shadow-lg w-full max-w-md text-center">
+        <h1 class="text-3xl font-bold text-slate-800 mb-4">¿Qué hora es?</h1>
+        
+        <!-- Relógio -->
+        <div class="clock mx-auto my-6">
+            <div class="number number-12">12</div>
+            <div class="number number-3">3</div>
+            <div class="number number-6">6</div>
+            <div class="number number-9">9</div>
+            <div id="hour-hand" class="hand hour-hand"></div>
+            <div id="minute-hand" class="hand minute-hand"></div>
+            <div class="center-dot"></div>
+        </div>
+        
+        <!-- Lembrete dos Ponteiros -->
+        <div class="text-xs text-slate-500 mb-6 flex justify-center gap-4">
+            <span><b>Ponteiro Grosso:</b> Hora</span>
+            <span><b>Ponteiro Fino:</b> Minuto</span>
+        </div>
+        
+        <!-- Campo de Resposta -->
+        <div class="mb-4">
+            <input type="text" id="answer-input" class="w-full border-2 border-slate-300 rounded-lg p-3 text-center text-lg focus:ring-2 focus:ring-sky-500 focus:border-sky-500" placeholder="Escreva a hora por extenso...">
+            <p id="feedback" class="mt-2 min-h-[50px] text-lg font-medium flex items-center justify-center"></p>
+        </div>
+
+        <!-- Botões -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <button id="hint-button" class="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                Dica
+            </button>
+            <button id="check-button" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                Verificar
+            </button>
+            <button id="new-time-button" class="w-full bg-slate-600 hover:bg-slate-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">
+                Nova Hora
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Elementos do DOM
+        const hourHand = document.getElementById('hour-hand');
+        const minuteHand = document.getElementById('minute-hand');
+        const answerInput = document.getElementById('answer-input');
+        const feedback = document.getElementById('feedback');
+        const checkButton = document.getElementById('check-button');
+        const newTimeButton = document.getElementById('new-time-button');
+        const hintButton = document.getElementById('hint-button');
+
+        let currentHour, currentMinute;
+
+        // Função para converter minutos em texto
+        const minutesToText = {
+            5: 'cinco', 10: 'diez', 15: 'cuarto', 20: 'veinte', 25: 'veinticinco', 30: 'media'
+        };
+
+        // Função para obter as respostas corretas possíveis
+        function getCorrectAnswers(h, m) {
+            const hoursText = ["doce", "una", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce"];
+            let answers = [];
+
+            let displayHour = h % 12;
+            if (displayHour === 0) displayHour = 12;
+
+            const prefix = (h === 1 && m < 31) ? 'es la' : 'son las';
+            
+            if (m === 0) {
+                answers.push(`${prefix} ${hoursText[displayHour]} en punto`);
+            } else if (m > 0 && m < 31) {
+                answers.push(`${prefix} ${hoursText[displayHour]} y ${minutesToText[m]}`);
+                if (m === 15) answers.push(`${prefix} ${hoursText[displayHour]} y quince`);
+                if (m === 30) answers.push(`${prefix} ${hoursText[displayHour]} y treinta`);
+            } else {
+                const nextHourDisplay = (displayHour === 12) ? 1 : displayHour + 1;
+                const nextHourPrefix = (nextHourDisplay === 1) ? 'es la' : 'son las';
+                const minutesLeft = 60 - m;
+                answers.push(`${nextHourPrefix} ${hoursText[nextHourDisplay]} menos ${minutesToText[minutesLeft]}`);
+                if (m === 45) answers.push(`${nextHourPrefix} ${hoursText[nextHourDisplay]} menos quince`);
+            }
+            return answers.map(a => a.toLowerCase().replace(/\s+/g, ' ').trim());
+        }
+        
+        // Função para gerar uma nova hora e atualizar o relógio
+        function generateNewTime() {
+            currentMinute = Math.floor(Math.random() * 12) * 5;
+            currentHour = Math.floor(Math.random() * 12) + 1;
+
+            const minuteDeg = (currentMinute / 60) * 360 + 90;
+            const hourDeg = ((currentHour / 12) * 360) + ((currentMinute / 60) * 30) + 90;
+
+            minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+            hourHand.style.transform = `rotate(${hourDeg}deg)`;
+
+            answerInput.value = '';
+            feedback.textContent = '';
+            answerInput.classList.remove('border-green-500', 'border-red-500');
+        }
+
+        // Função para mostrar a dica
+        function showHint() {
+            let hintText = '';
+            const hoursText = ["doce", "una", "dos", "tres", "cuatro", "cinco", "seis", "siete", "ocho", "nueve", "diez", "once", "doce"];
+             let displayHour = currentHour % 12;
+            if (displayHour === 0) displayHour = 12;
+
+            if (currentMinute === 0) {
+                hintText = "Use a expressão 'en punto'.";
+            } else if (currentMinute > 0 && currentMinute < 31) {
+                const prefix = (currentHour === 1) ? 'Es la' : 'Son las';
+                hintText = `Comece com '${prefix} ${hoursText[displayHour]} y...'`;
+            } else {
+                hintText = "Use 'menos' e lembre-se de usar a próxima hora.";
+            }
+            feedback.textContent = hintText;
+            feedback.className = 'mt-2 min-h-[50px] text-lg font-medium flex items-center justify-center text-amber-600';
+        }
+
+        // Função para verificar a resposta do usuário
+        function checkAnswer() {
+            const userAnswer = answerInput.value.trim().toLowerCase().replace(/\s+/g, ' ').trim();
+            const correctAnswers = getCorrectAnswers(currentHour, currentMinute);
+
+            if (correctAnswers.includes(userAnswer)) {
+                feedback.textContent = '¡Correcto!';
+                feedback.className = 'mt-2 min-h-[50px] text-lg font-medium flex items-center justify-center text-green-600';
+                answerInput.classList.add('border-green-500');
+                answerInput.classList.remove('border-red-500');
+            } else {
+                let correctAnswerFormatted = correctAnswers[0].charAt(0).toUpperCase() + correctAnswers[0].slice(1);
+                feedback.textContent = `Incorreto. Uma resposta é: ${correctAnswerFormatted}`;
+                feedback.className = 'mt-2 min-h-[50px] text-lg font-medium flex items-center justify-center text-red-600';
+                 answerInput.classList.add('border-red-500');
+                answerInput.classList.remove('border-green-500');
+            }
+        }
+
+        // Adiciona os eventos aos botões
+        checkButton.addEventListener('click', checkAnswer);
+        newTimeButton.addEventListener('click', generateNewTime);
+        hintButton.addEventListener('click', showHint);
+        answerInput.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') {
+                checkAnswer();
+            }
+        });
+        
+        // Gera a primeira hora ao carregar a página
+        generateNewTime();
+
+    </script>
+</body>
+</html>
